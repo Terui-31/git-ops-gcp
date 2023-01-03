@@ -167,10 +167,10 @@ steps:
         fi
     secretEnv: ['GITHUB_TOKEN']
   # [END make-pr]
-  
-  options:
-    logging: CLOUD_LOGGING_ONLY  
-  availableSecrets:
-    secretManager:
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+availableSecrets:
+  secretManager:
     - versionName: projects/$PROJECT_ID/secrets/github-token-for-cd/versions/1
       env: 'GITHUB_TOKEN'
