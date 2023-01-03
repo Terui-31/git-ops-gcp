@@ -18,39 +18,36 @@ steps:
     args: 
     - '-c'
     - |
-        # if  [ "$BRANCH_NAME" == "env/prd_review" -o "$BRANCH_NAME" == "env/prd" ]; then
-        if  [[ "$BRANCH_NAME" =~ "/prd$" -o "$BRANCH_NAME" == "env/prd_review"]]; then
+        if [[ "$BRANCH_NAME" =~ "/prd$" -o "$BRANCH_NAME" =~ "/prd_review$"]]; then
           echo "##################################"
           echo "#"
           echo "# Init Projects on prdoduction"
           echo "#"
           echo "##################################"
-          
           cd /workspace/projects/infra/environments/prd
           terraform init || exit -1
 
-        elif  [[ "$BRANCH_NAME" =~ "/stg$" ]]; then
-          echo "##################################"
-          echo "#"
-          echo "# Init Projects on staging"
-          echo "#"
-          echo "##################################"
-          
-          cd /workspace/projects/infra/environments/stg
-          terraform init || exit -1
+        # elif [[ "$BRANCH_NAME" =~ "/stg$" -o "$BRANCH_NAME" =~ "/stg_review$"]]; then
+        #   echo "##################################"
+        #   echo "#"
+        #   echo "# Init Projects on staging"
+        #   echo "#"
+        #   echo "##################################"
+        #   cd /workspace/projects/infra/environments/stg
+        #   terraform init || exit -1
 
-        elif  [[ "$BRANCH_NAME" =~ "/dev$" ]]; then
+        elif [[ "$BRANCH_NAME" =~ "/dev$"]]; then
           echo "##################################"
           echo "#"
           echo "# Init Projects on devlopment"
           echo "#"
           echo "##################################"
-          
           cd /workspace/projects/infra/environments/dev
           terraform init || exit -1
           
         else
           echo "skip"
+        
         fi
   
   # [START tf-plan]
@@ -60,13 +57,12 @@ steps:
     args: 
     - '-c'
     - |
-        if  [ "$BRANCH_NAME" == "env/prd_review" ]; then
+        if [["$BRANCH_NAME" =~ "/prd_review$"]]; then
           echo "##################################"
           echo "#"
           echo "# Create Plans on prd"
           echo "#"
-          echo "##################################"
-          
+          echo "##################################"  
           cd /workspace/projects/infra/environments/prd
           terraform plan >& /tmp/output
           R=$$?
@@ -74,18 +70,27 @@ steps:
           if [ $$R -ne 0 ]; then
               exit 1
           fi
-  
-          cd /workspace/projects/03_svc/simpleweb-svc/environments/prd
-          terraform plan >& /tmp/output
-          R=$$?
-          cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
-          if [ $$R -ne 0 ]; then
-              exit 1
-          fi
-        elif  [ "$BRANCH_NAME" == "env/dev" ]; then
+        
+        # elif [[ "$BRANCH_NAME" =~ "/stg$" -o "$BRANCH_NAME" =~ "/stg_review$"]]; then
+        #   echo "##################################"
+        #   echo "#"
+        #   echo "# Create Plans on stg"
+        #   echo "#"
+        #   echo "##################################"
+        #   cd /workspace/projects/infra/environments/stg
+        #   terraform plan >& /tmp/output
+        #   R=$$?
+        #   cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
+        #   if [ $$R -ne 0 ]; then
+        #       exit 1
+        #   fi
+        
+        elif [[ "$BRANCH_NAME" =~ "/dev$"]]; then
           echo "skip"
+        
         else
           echo "skip"
+        
         fi
   # [END tf-plan]
   
@@ -96,44 +101,13 @@ steps:
     args: 
     - '-c'
     - | 
-        if [ "$BRANCH_NAME" == "env/all" ]; then
-          echo "##################################"
-          echo "#"
-          echo "# Deploy on all"
-          echo "#"
-          echo "##################################"
-  
-          cd /workspace/projects/01_org/01_resources/environments/all
-          terraform apply -auto-approve >& /tmp/output
-          R=$$?
-          cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
-          if [ $$R -ne 0 ]; then
-              exit 1
-          fi
-  
-          cd /workspace/projects/01_org/02_groups/environments/all
-          terraform apply -auto-approve >& /tmp/output
-          R=$$?
-          cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
-          if [ $$R -ne 0 ]; then
-              exit 1
-          fi
-  
-          cd /workspace/projects/02_cmn/terraform-cmn/environments/all
-          terraform apply -auto-approve >& /tmp/output
-          R=$$?
-          cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
-          if [ $$R -ne 0 ]; then
-              exit 1
-          fi
-        elif [ "$BRANCH_NAME" == "env/prd" ]; then
+        if [["$BRANCH_NAME" =~ "/prd$"]]; then
           echo "##################################"
           echo "#"
           echo "# Deploy on production"
           echo "#"
           echo "##################################"
-  
-          cd /workspace/projects/02_cmn/sharedvpc-cmn/environments/prd
+          cd /workspace/projects/infra/environments/prd
           terraform apply -auto-approve >& /tmp/output
           R=$$?
           cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
@@ -141,21 +115,13 @@ steps:
               exit 1
           fi
   
-          cd /workspace/projects/03_svc/simpleweb-svc/environments/prd
-          terraform apply -auto-approve >& /tmp/output
-          R=$$?
-          cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
-          if [ $$R -ne 0 ]; then
-              exit 1
-          fi
-        elif [ "$BRANCH_NAME" == "env/dev" ]; then
+        elif [[ "$BRANCH_NAME" =~ "/dev$"]]; then
           echo "##################################"
           echo "#"
           echo "# Deploy on development"
           echo "#"
           echo "##################################"
-  
-          cd /workspace/projects/02_cmn/sharedvpc-cmn/environments/dev
+          cd cd /workspace/projects/infra/environments/dev
           terraform apply -auto-approve >& /tmp/output
           R=$$?
           cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
@@ -163,17 +129,12 @@ steps:
               exit 1
           fi
   
-          cd /workspace/projects/03_svc/simpleweb-svc/environments/dev
-          terraform apply -auto-approve >& /tmp/output
-          R=$$?
-          cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
-          if [ $$R -ne 0 ]; then
-              exit 1
-          fi
         else
           echo "skip"
+        
         fi
-  # [END tf-apply] 
+  # [END tf-apply]
+
   # [START make-pr]
   - id: 'make a pull request'
     name: 'centos'
@@ -181,41 +142,32 @@ steps:
     args: 
     - '-c'
     - | 
-        if [ "$BRANCH_NAME" == "env/all_review" ]; then
-          echo "##################################"
-          echo "#"
-          echo "# Make a Pull Request for all."
-          echo "#"
-          echo "##################################"
-          sh -x /workspace/cli/make-pr.sh $$GITHUB_TOKEN $PROJECT_ID $BUILD_ID "env/all_review" "env/all" TRUE
-        elif [ "$BRANCH_NAME" == "env/prd_review" ]; then
+        if [[ "$BRANCH_NAME" =~ "/prd_review$" ]]; then
           # echo "##################################"
           # echo "#"
           # echo "# Make a Pull Request for prduction."
           # echo "#"
           # echo "##################################"
           sh -x /workspace/cli/make-pr.sh $$GITHUB_TOKEN $PROJECT_ID $BUILD_ID "env/prd_review" "env/prd" TRUE
-        elif [ "$BRANCH_NAME" == "env/all" ]; then
-          # echo "##################################"
-          # echo "#"
-          # echo "# Make a Pull Request for main."
-          # echo "#"
-          # echo "##################################"
-          sh -x /workspace/cli/make-pr.sh $$GITHUB_TOKEN $PROJECT_ID $BUILD_ID "env/all" "main" FALSE
-        elif [ "$BRANCH_NAME" == "env/prd" ]; then
+        
+        elif [[ "$BRANCH_NAME" =~ "/prd$" ]]; then
           # echo "##################################"
           # echo "#"
           # echo "# Make a Pull Request for production."
           # echo "#"
           # echo "##################################"
           sh -x /workspace/cli/make-pr.sh $$GITHUB_TOKEN $PROJECT_ID $BUILD_ID "env/prd" "main" FALSE
-        elif [ "$BRANCH_NAME" == "env/dev" ]; then
+        
+        elif [[ "$BRANCH_NAME" == "/dev$" ]]; then
           echo "skip"
+        
         else
           echo "skip"
+        
         fi
     secretEnv: ['GITHUB_TOKEN']
   # [END make-pr]
+  
   options:
     logging: CLOUD_LOGGING_ONLY  
   availableSecrets:
