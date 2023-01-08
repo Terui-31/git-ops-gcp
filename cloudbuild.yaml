@@ -23,7 +23,10 @@ steps:
           echo "# Init Projects on prdoduction"
           echo "#"
           echo "##################################"
+          pwd
+          ls
           cd projects/infra/environments/prd
+          cd workspace/projects/infra/environments/prd
           terraform init || exit -1
 
         elif [ "$BRANCH_NAME" == "dev" ]; then
