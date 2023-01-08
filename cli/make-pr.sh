@@ -7,8 +7,8 @@ BRANCH_FROM=$4
 BRANCH_TO=$5
 IS_DEPLOY=$6
 
-OWNER=koduki
-REPO=gcp-terraform
+OWNER=Terui-31
+REPO=git-ops-gcp
 COMPARE=${OWNER}:${BRANCH_FROM}
 BASE=${BRANCH_TO}
 
