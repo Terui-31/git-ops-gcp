@@ -2,10 +2,10 @@ module "gce-lb-http" {
   source            = "GoogleCloudPlatform/lb-http/google"
   version           = "~> 6.0"
   name              = "${var.env}-group-http-lb"
-  project           = var.service_project
+  project           = var.project_id
   target_tags       = ["allow-group-http-lb"]
-  firewall_projects = [var.host_project]
-  firewall_networks = [var.network]
+  firewall_projects = [var.vpc_host_project]
+  firewall_networks = [var.vpc_network]
 
   backends = {
     default = {
@@ -56,8 +56,8 @@ module "gce-lb-http" {
 
       iap_config = {
         enable               = false
-        oauth2_client_id     = ""
-        oauth2_client_secret = ""
+        oauth2_client_id     = null
+        oauth2_client_secret = null
       }
     }
   }
