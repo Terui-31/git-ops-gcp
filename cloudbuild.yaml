@@ -129,7 +129,7 @@ steps:
         elif [ "$BRANCH_NAME" == "prd" ]; then
           # echo "##################################"
           # echo "#"
-          # echo "# Make a Pull Request for production."
+          # echo "# Make a Pull Request for main."
           # echo "#"
           # echo "##################################"
           sh -x /workspace/cli/make-pr.sh $$GITHUB_TOKEN $PROJECT_ID $BUILD_ID "prd" "main" FALSE

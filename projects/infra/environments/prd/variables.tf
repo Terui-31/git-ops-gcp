@@ -1,5 +1,5 @@
-variable "project" {}
-variable "region" {}
+variable "project_id" {}
+variable "zone" {}
 variable "env" {}
 
 variable "sharedvpc_project" {}
