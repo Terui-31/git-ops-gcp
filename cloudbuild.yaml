@@ -97,7 +97,7 @@ steps:
           echo "# Deploy on development"
           echo "#"
           echo "##################################"
-          cd cd /workspace/projects/infra/environments/dev
+          cd /workspace/projects/infra/environments/dev
           terraform apply -auto-approve >& /tmp/output
           R=$$?
           cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
