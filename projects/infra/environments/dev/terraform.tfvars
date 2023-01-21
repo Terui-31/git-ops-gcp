@@ -1,4 +1,4 @@
-project_id="git-ops-dev"
+project_id="git-ops-gcp"
 zone="asia-northeast1-a"
 env="dev"
 
