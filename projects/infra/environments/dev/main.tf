@@ -13,7 +13,7 @@ resource "google_project_service" "apis" {
     project = var.project_id
     for_each = local.services
     service = each.value
-    disable_dependent_services = true
+    # disable_dependent_services = true
 }
 
 resource "google_compute_shared_vpc_service_project" "vpc" {
