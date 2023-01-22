@@ -98,8 +98,7 @@ steps:
           echo "#"
           echo "##################################"
           cd /workspace/projects/infra/environments/dev
-          gcloud config set project ${PROJECT_ID}
-          terraform apply -auto-approve >& /tmp/output
+          terraform apply -lock=false -auto-approve >& /tmp/output
           R=$$?
           cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
           if [ $$R -ne 0 ]; then
