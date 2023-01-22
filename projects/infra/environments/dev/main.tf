@@ -17,13 +17,13 @@ resource "google_project_service" "apis" {
     disable_dependent_services = true
 }
 
-# resource "time_sleep" "gcp_wait_crm_api_enabling" {
-#   depends_on = [
-#     google_project_service.apis
-#   ]
+resource "time_sleep" "gcp_wait_crm_api_enabling" {
+  depends_on = [
+    google_project_service.apis
+  ]
 
-#   create_duration = "1m"
-# }
+  create_duration = "1m"
+}
 
 resource "google_compute_shared_vpc_service_project" "vpc" {
     host_project = var.sharedvpc_project
