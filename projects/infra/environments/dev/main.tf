@@ -14,7 +14,7 @@ resource "google_project_service" "apis" {
     project = var.project_id
     for_each = local.services
     service = each.value
-    disable_dependent_services = true
+    # disable_dependent_services = true
 }
 
 resource "time_sleep" "gcp_wait_crm_api_enabling" {
