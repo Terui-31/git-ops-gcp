@@ -1,11 +1,11 @@
 locals {
     services = toset([
-        "cloudresourcemanager.googleapis.com",
+        # "cloudresourcemanager.googleapis.com",
         "bigquery.googleapis.com",
         "dlp.googleapis.com",
-        "cloudbuild.googleapis.com",
-        "iam.googleapis.com",
-        "compute.googleapis.com",
+        # "cloudbuild.googleapis.com",
+        # "iam.googleapis.com",
+        # "compute.googleapis.com",
     ])
     subnet_front = "projects/${var.sharedvpc_project}/regions/${var.sharedvpc_region}/subnetworks/${var.sharedvpc_front}"
 }
