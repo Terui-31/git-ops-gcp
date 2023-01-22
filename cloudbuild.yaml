@@ -12,7 +12,7 @@ steps:
         echo "##################################"
   
   - id: 'tf init'
-    name: 'hashicorp/terraform:1.3.6'
+    name: 'hashicorp/terraform:1.0.1'
     entrypoint: 'sh'
     args: 
     - '-c'
@@ -42,7 +42,7 @@ steps:
   
   # [START tf-plan]
   - id: 'tf plan'
-    name: 'hashicorp/terraform:1.3.6'
+    name: 'hashicorp/terraform:1.0.1'
     entrypoint: 'sh'
     args:
     - '-c'
