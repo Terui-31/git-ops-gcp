@@ -1,5 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "dev-terraform-confs"
+    bucket = "tfstate-terraform-test"
+    prefix = "dev"
   }
 }
