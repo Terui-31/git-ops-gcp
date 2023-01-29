@@ -6,6 +6,7 @@ locals {
     project_id = "gcp-git-ops"
     env = "dev"
     region = "asia-northeast1"
+    zone  = "asia-northeast1-a"
     services = toset([
         # "cloudresourcemanager.googleapis.com",
         # "bigquery.googleapis.com",
