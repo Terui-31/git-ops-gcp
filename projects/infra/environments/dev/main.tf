@@ -35,7 +35,7 @@ resource "google_project_service" "apis" {
 #--------------------------------------
 
 module "common" {
-  source = "../../../common_modules"
+  source = "../../../../common_modules"
 
   env = local.env
 }
