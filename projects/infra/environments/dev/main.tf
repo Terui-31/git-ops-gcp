@@ -5,7 +5,7 @@
 locals {
     project_id = "gcp-git-ops"
     env = "dev"
-    region = "asia-northeast1"
+    location = "asia-northeast1"
     zone  = "asia-northeast1-a"
     services = toset([
         # "cloudresourcemanager.googleapis.com",
@@ -15,7 +15,7 @@ locals {
         # "iam.googleapis.com",
         "compute.googleapis.com",
     ])
-    subnet_front = "projects/${var.sharedvpc_project}/regions/${var.sharedvpc_region}/subnetworks/${var.sharedvpc_front}"
+    # subnet_front = "projects/${var.sharedvpc_project}/regions/${var.sharedvpc_region}/subnetworks/${var.sharedvpc_front}"
 }
 
 
