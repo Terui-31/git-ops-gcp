@@ -39,6 +39,7 @@ module "common" {
   source = "../../../../common_modules"
 
   env = local.env
+  location = local.location
 }
 
 module "infrastructure" {
