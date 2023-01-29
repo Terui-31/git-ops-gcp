@@ -30,6 +30,14 @@ resource "google_project_service" "apis" {
     # disable_dependent_services = true
 }
 
+# resource "time_sleep" "gcp_wait_crm_api_enabling" {
+#   depends_on = [
+#     google_project_service.apis
+#   ]
+
+#   create_duration = "1m"
+# }
+
 
 #--------------------------------------
 # Deploy Modules
@@ -46,16 +54,8 @@ module "infrastructure" {
   source = "../../modules"
 
   env = local.env
-  common_vars = module.common.common_vars
+  # common_vars = module.common.common_vars
 }
-
-# resource "time_sleep" "gcp_wait_crm_api_enabling" {
-#   depends_on = [
-#     google_project_service.apis
-#   ]
-
-#   create_duration = "1m"
-# }
 
 
 #--------------------------------------
