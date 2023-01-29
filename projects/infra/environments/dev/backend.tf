@@ -1,6 +1,7 @@
 terraform {
   backend "gcs" {
-    bucket = "tfstate-terraform-dev"
-    prefix = "dev"
+    bucket = "terraform-confs"
+    key = "tfstate/dev/terraform.tfstate"
+    region = "asia-northeast1"
   }
 }
