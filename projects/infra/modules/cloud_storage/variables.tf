@@ -1,3 +1,17 @@
+variable "env" {
+    type  = string
+}
+
+variable "location" {
+    type  = string
+}
+
+output "common_vars" {
+    type = object({
+        project_id = map(string)
+    })
+}
+
 # variable "project_id" {}
 # variable "env" {}
 # variable "vpc_host_project" {}

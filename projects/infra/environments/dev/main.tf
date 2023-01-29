@@ -46,7 +46,7 @@ module "infrastructure" {
   source = "../../modules"
 
   env = local.env
-  common_vars = module.common.common_modules 
+  common_vars = module.common.common_vars
 }
 
 # resource "time_sleep" "gcp_wait_crm_api_enabling" {
