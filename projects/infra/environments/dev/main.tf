@@ -55,6 +55,7 @@ module "infrastructure" {
   source = "../../modules"
 
   env = local.env
+  location = local.location
   # common_vars = module.common.common_vars
 }
 
