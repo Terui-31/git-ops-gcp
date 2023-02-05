@@ -10,8 +10,8 @@ variable "env" {
 #     type  = string
 # }
 
-# variable "common_vars" {
-#         type = object({
-#         project_id = map(string)
-#     })
-# }
+variable "common_vars" {
+        type = object({
+        project_id = map(string)
+    })
+}
