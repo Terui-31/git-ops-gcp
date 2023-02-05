@@ -56,6 +56,7 @@ module "infrastructure" {
 
   env = local.env
   location = local.location
+  project_id = local.project_id
   # common_vars = module.common.common_vars
 }
 
