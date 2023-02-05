@@ -3,17 +3,16 @@
 #--------------------------------------
 
 locals {
-    # project_id = "git-ops-gcp"
+    # project_id = var.common_vars.project_id #"git-ops-gcp"
     env = "dev"
     location = "asia-northeast1"
     zone  = "asia-northeast1-a"
     services = toset([
-        # "cloudresourcemanager.googleapis.com",
+        "compute.googleapis.com",
         # "bigquery.googleapis.com",
         # "dlp.googleapis.com",
         # "cloudbuild.googleapis.com",
         # "iam.googleapis.com",
-        "compute.googleapis.com",
     ])
     # subnet_front = "projects/${var.sharedvpc_project}/regions/${var.sharedvpc_region}/subnetworks/${var.sharedvpc_front}"
 }
@@ -28,16 +27,13 @@ module "infrastructure" {
 
   env = local.env
   location = local.location
-  # project_id = local.project_id
-  common_vars = module.common.common_vars
 }
 
 module "common" {
   source = "../../../../common_modules"
 
   env = local.env
-  # location = local.location
-  project_id = var.common_vars.project_id
+  location = local.location
 }
 
 
@@ -46,7 +42,7 @@ module "common" {
 #--------------------------------------
 
 resource "google_project_service" "apis" {
-    project = local.project_id
+    project = var.common_vars.project_id[var.env]
     for_each = local.services
     service = each.value
     # disable_dependent_services = true
