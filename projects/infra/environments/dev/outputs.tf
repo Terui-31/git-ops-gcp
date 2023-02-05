@@ -1,3 +1,3 @@
-output "outputs" {
-  value = module.infrastructure.outputs
-}
+# output "outputs" {
+#   value = module.infrastructure.outputs
+# }
