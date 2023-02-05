@@ -1,5 +1,5 @@
-env = var.env
-location = var.location
+# env = var.env
+# location = var.location
 
 # project_id="git-ops-gcp"
 # zone="asia-northeast1-a"

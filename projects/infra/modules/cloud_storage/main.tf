@@ -1,21 +1,21 @@
-resource "google_storage_bucket" "terraform-state-store-2" {
-  name     = "${var.env}-sample-bucket-2"
-  location = "${var.location}"
-  storage_class = "REGIONAL"
+# resource "google_storage_bucket" "terraform-state-store-2" {
+#   name     = "${var.env}-sample-bucket-2"
+#   location = "${var.location}"
+#   storage_class = "REGIONAL"
 
-  versioning {
-    enabled = true
-  }
+#   versioning {
+#     enabled = true
+#   }
 
-  lifecycle_rule {
-    action {
-      type = "Delete"
-    }
-    condition {
-      num_newer_versions = 5
-    }
-  }
-}
+#   lifecycle_rule {
+#     action {
+#       type = "Delete"
+#     }
+#     condition {
+#       num_newer_versions = 5
+#     }
+#   }
+# }
 
 # resource "google_compute_instance" "default" {
 #   name         = "test"
