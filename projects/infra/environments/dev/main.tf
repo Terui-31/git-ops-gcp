@@ -36,7 +36,7 @@ module "common" {
   source = "../../../../common_modules"
 
   env = local.env
-  location = local.location
+  # location = local.location
   project_id = var.common_vars.project_id
 }
 
