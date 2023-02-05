@@ -1,9 +1,9 @@
 #--------------------------------------
-# Variables
+# locals
 #--------------------------------------
 
 locals {
-    project_id = "git-ops-gcp"
+    # project_id = "git-ops-gcp"
     env = "dev"
     location = "asia-northeast1"
     zone  = "asia-northeast1-a"
@@ -16,6 +16,28 @@ locals {
         "compute.googleapis.com",
     ])
     # subnet_front = "projects/${var.sharedvpc_project}/regions/${var.sharedvpc_region}/subnetworks/${var.sharedvpc_front}"
+}
+
+
+#--------------------------------------
+# Deploy Modules
+#--------------------------------------
+
+module "infrastructure" {
+  source = "../../modules"
+
+  env = local.env
+  location = local.location
+  # project_id = local.project_id
+  common_vars = module.common.common_vars
+}
+
+module "common" {
+  source = "../../../../common_modules"
+
+  env = local.env
+  location = local.location
+  project_id = var.common_vars.project_id
 }
 
 
@@ -37,28 +59,6 @@ resource "google_project_service" "apis" {
 
 #   create_duration = "1m"
 # }
-
-
-#--------------------------------------
-# Deploy Modules
-#--------------------------------------
-
-module "common" {
-  source = "../../../../common_modules"
-
-  env = local.env
-  location = local.location
-  project_id = local.project_id
-}
-
-module "infrastructure" {
-  source = "../../modules"
-
-  env = local.env
-  location = local.location
-  project_id = local.project_id
-  common_vars = module.common.common_vars
-}
 
 
 #--------------------------------------
