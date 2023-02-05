@@ -48,6 +48,7 @@ module "common" {
 
   env = local.env
   location = local.location
+  project_id = local.project_id
 }
 
 module "infrastructure" {
