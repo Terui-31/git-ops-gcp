@@ -3,7 +3,7 @@
 #--------------------------------------
 
 locals {
-    project_id = "gcp-git-ops"
+    project_id = "git-ops-gcp"
     env = "dev"
     location = "asia-northeast1"
     zone  = "asia-northeast1-a"
