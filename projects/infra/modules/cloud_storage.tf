@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "terraform-state-store" {
-  name     = "${var.env}-sample-bucket"
+  name     = "${var.env}-terraform-bucket"
   location = "${var.location}"
   storage_class = "REGIONAL"
 
