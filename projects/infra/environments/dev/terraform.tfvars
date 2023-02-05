@@ -1,6 +1,6 @@
-project_id="git-ops-gcp"
-env="dev"
-location="asia-northeast1"
+# project_id="git-ops-gcp"
+# env="dev"
+# location="asia-northeast1"
 
 # sharedvpc_project = "git-ops-gcp"
 # sharedvpc_name    = "vpc-dev-default"
