@@ -6,6 +6,10 @@ variable "location" {
     type  = string
 }
 
+variable "project_id" {
+    type  = string
+}
+
 # output "common_vars" {
 #     value = {
 #         project_id = {
