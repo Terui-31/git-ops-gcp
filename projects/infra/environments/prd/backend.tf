@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "tfstate-terraform-prd"
-    prefix = "prd"
+    bucket = "tfstate-terraform-test"
+    prefix = "${var.env}"
   }
 }

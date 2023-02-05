@@ -3,8 +3,7 @@
 #--------------------------------------
 
 locals {
-    # project_id = var.common_vars.project_id #"git-ops-gcp"
-    env = "dev"
+    env = "dev" # change value if you create new env
     location = "asia-northeast1"
     zone  = "asia-northeast1-a"
     services = toset([
