@@ -1,13 +1,12 @@
-env="dev"
-location="asia-northeast1"
-# common_vars = {
-#     project_id = {
-#         dev = "git-ops-gcp"
-#         # stg = "git-ops-gcp"
-#         prd = "git-ops-gcp"
-#     }
-# }
-common_vars = var.common_vars.project_id[var.env]
+env = "dev"
+location = "asia-northeast1"
+common_vars = {
+    project_id = {
+        dev = "git-ops-gcp"
+        # stg = "git-ops-gcp"
+        prd = "git-ops-gcp"
+    }
+}
 
 # sharedvpc_project = "git-ops-gcp"
 # sharedvpc_name    = "vpc-dev-default"
