@@ -3,7 +3,7 @@
 #--------------------------------------
 
 locals {
-    env = "dev" # change value if you create new env
+    env = "prd" # change value if you create new env
     location = "asia-northeast1"
     zone  = "asia-northeast1-a"
     services = toset([
