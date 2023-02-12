@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"lb-http","Source":"../../modules/lb-http","Dir":"../../modules/lb-http"},{"Key":"lb-http.gce-lb-http","Source":"registry.terraform.io/GoogleCloudPlatform/lb-http/google","Version":"6.3.0","Dir":".terraform/modules/lb-http.gce-lb-http"},{"Key":"web_server","Source":"../../modules/web_server","Dir":"../../modules/web_server"},{"Key":"","Source":"","Dir":"."}]}

@@ -1,4 +1,4 @@
-project="git-ops-prd"
+project_id="git-ops-prd"
 zone="asia-northeast1-a"
 env="prd"
 
