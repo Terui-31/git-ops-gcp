@@ -1,6 +1,6 @@
 steps:
   - id: 'branch name'
-    name: 'hashicorp/terraform:1.3.6'
+    name: 'hashicorp/terraform:1.1.2'
     entrypoint: 'sh'
     args: 
     - '-c'
@@ -12,7 +12,7 @@ steps:
         echo "##################################"
   
   - id: 'tf init'
-    name: 'hashicorp/terraform:1.3.6'
+    name: 'hashicorp/terraform:1.1.2'
     entrypoint: 'sh'
     args: 
     - '-c'
@@ -42,7 +42,7 @@ steps:
   
   # [START tf-plan]
   - id: 'tf plan'
-    name: 'hashicorp/terraform:1.3.6'
+    name: 'hashicorp/terraform:1.1.2'
     entrypoint: 'sh'
     args:
     - '-c'
@@ -72,7 +72,7 @@ steps:
   
   # [START tf-apply]
   - id: 'tf apply'
-    name: 'hashicorp/terraform:1.3.6'
+    name: 'hashicorp/terraform:1.1.2'
     entrypoint: 'sh'
     args:
     - '-c'
@@ -97,8 +97,8 @@ steps:
           echo "# Deploy on development"
           echo "#"
           echo "##################################"
-          cd cd /workspace/projects/infra/environments/dev
-          terraform apply -auto-approve >& /tmp/output
+          cd /workspace/projects/infra/environments/dev
+          terraform apply -lock=false -auto-approve >& /tmp/output
           R=$$?
           cat /tmp/output | sed "s/\x1B\[[0-9;]*[a-zA-Z]/ /g"
           if [ $$R -ne 0 ]; then
